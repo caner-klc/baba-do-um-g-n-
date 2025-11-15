@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babamın Doğum Günü Mektubu</title>
+    <style>
+        /* CSS Kodları Buraya Gömüldü */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Link Stili */
+        #birthdayLink {
+            text-decoration: none;
+            padding: 15px 30px;
+            background-color: #e74c3c; /* Kırmızı */
+            color: white;
+            border-radius: 8px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #birthdayLink:hover {
+            background-color: #c0392b;
+            transform: scale(1.05);
+        }
+
+        /* Zarfın Kapsayıcısı */
+        .envelope-wrapper {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 20;
+            perspective: 1000px; /* 3D efekt için */
+        }
+
+        /* Zarf Stili */
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background-color: #f1c40f; /* Altın Sarısı */
+            position: relative;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: transform 1s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        /* Açma Düğmesi */
+        #openButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 30;
+            transition: opacity 0.5s;
+        }
+        
+        /* Mektup Metni */
+        .letter-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 280px;
+            height: 180px;
+            background-color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 3px;
+            opacity: 0;
+            transition: opacity 1s 0.8s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transform: translateZ(10px); /* 3D'de önde görünmesi için */
+        }
+
+        .letter-text p {
+            margin: 5px 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        /* JS ile eklenecek sınıflar */
+
+        .envelope.opened {
+            transform: rotateX(180deg); /* 3D açılma efekti */
+        }
+
+        .envelope.opened #openButton {
+            opacity: 0;
+        }
+
+        .envelope-wrapper.visible {
+            display: block;
+        }
+
+        .envelope-wrapper.open-letter .letter-text {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" id="birthdayLink">Babam İçin Özel Mektup</a>
+
+    <div class="envelope-wrapper">
+        <div class="envelope">
+            <button id="openButton">Mektubu Aç</button>
+        </div>
+        
+        <div class="letter-text">
+            <p>Çok çektik, çok düştük ama gene ailemizleyiz.</p>
+            <p>İyi ki doğdun, baba!</p>
+        </div>
+    </div>
+
+    <script>
+        // JS Kodları Buraya Gömüldü
+        document.addEventListener('DOMContentLoaded', () => {
+            const birthdayLink = document.getElementById('birthdayLink');
+            const envelopeWrapper = document.querySelector('.envelope-wrapper');
+            const openButton = document.getElementById('openButton');
+            const envelope = document.querySelector('.envelope');
+
+            // 1. Linke Tıklayınca Zarfı Göster
+            birthdayLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                envelopeWrapper.classList.add('visible');
+                birthdayLink.style.display = 'none';
+            });
+
+            // 2. Aç Butonuna Tıklayınca Zarfı Aç ve Mektubu Göster
+            openButton.addEventListener('click', () => {
+                envelope.classList.add('opened');
+
+                // Mektup metnini gösterme animasyonunu başlat
+                setTimeout(() => {
+                    envelopeWrapper.classList.add('open-letter');
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
