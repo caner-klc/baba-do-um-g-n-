@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Babamın Doğum Günü Mektubu</title>
     <style>
-        /* CSS Kodları */
+        /* CSS KODLARI */
         body {
             display: flex;
             flex-direction: column;
@@ -18,24 +18,25 @@
             overflow: hidden;
         }
 
-        /* Link Stili */
+        /* Link/Buton Stili */
         #birthdayLink {
             text-decoration: none;
-            padding: 15px 30px;
+            padding: 18px 35px;
             background-color: #e74c3c; /* Kırmızı */
             color: white;
-            border-radius: 8px;
-            font-size: 1.5em;
+            border-radius: 10px;
+            font-size: 1.6em;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             z-index: 10;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            border-bottom: 4px solid #c0392b; 
         }
 
-        #birthdayLink:hover {
-            background-color: #c0392b;
-            transform: scale(1.05);
+        #birthdayLink:active {
+            transform: translateY(2px);
+            border-bottom: 2px solid #c0392b;
         }
 
         /* Zarfın Kapsayıcısı */
@@ -46,7 +47,7 @@
             transform: translate(-50%, -50%);
             display: none;
             z-index: 20;
-            perspective: 1000px; /* 3D efekt için */
+            perspective: 1000px;
         }
 
         /* Zarf Stili */
@@ -96,7 +97,8 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            transform: translateZ(10px); /* 3D'de önde görünmesi için */
+            transform: translateZ(10px);
+            line-height: 1.4;
         }
 
         .letter-text p {
@@ -105,14 +107,16 @@
             color: #333;
         }
 
-        /* JS ile eklenecek sınıflar */
-
-        .envelope.opened {
-            transform: rotateX(180deg); /* 3D açılma efekti */
+        .sender-note {
+            font-size: 0.9em;
+            margin-top: 15px;
+            color: #777;
+            font-style: italic;
         }
 
-        .envelope.opened #openButton {
-            opacity: 0;
+        /* JS ile eklenecek sınıflar */
+        .envelope.opened {
+            transform: rotateX(180deg);
         }
 
         .envelope-wrapper.visible {
@@ -134,13 +138,13 @@
         </div>
         
         <div class="letter-text">
-            <p>Çok çektik, çok düştük ama gene ailemizleyiz.</p>
-            <p>İyi ki doğdun, baba!</p>
+            <p>İyi ki doğdun baba, doğum günün kutlu olsun, nice yıllara. Ailemizin direği babam.</p>
+            <p class="sender-note">Caner tarafından gönderildi.</p>
         </div>
     </div>
 
     <script>
-        // JS Kodları
+        // JS KODU
         document.addEventListener('DOMContentLoaded', () => {
             const birthdayLink = document.getElementById('birthdayLink');
             const envelopeWrapper = document.querySelector('.envelope-wrapper');
@@ -155,15 +159,19 @@
             });
 
             // 2. Aç Butonuna Tıklayınca Zarfı Aç ve Mektubu Göster
-openButton.addEventListener('click', () => {
-    openButton.style.display = 'none'; // Butonu hemen gizle
-    envelope.classList.add('opened');
+            openButton.addEventListener('click', () => {
+                // Butonu gizle ve etkileşimini kes
+                openButton.style.opacity = '0';
+                openButton.style.pointerEvents = 'none';
 
-    // Mektup metnini gösterme animasyonunu başlat
-    setTimeout(() => {
-        envelopeWrapper.classList.add('open-letter');
-    }, 500);
-});
+                // Zarfı aç
+                envelope.classList.add('opened');
+
+                // Mektup metnini gösterme animasyonunu başlat
+                setTimeout(() => {
+                    envelopeWrapper.classList.add('open-letter');
+                }, 500);
+            });
         });
     </script>
 </body>
