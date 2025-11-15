@@ -155,14 +155,15 @@
             });
 
             // 2. Aç Butonuna Tıklayınca Zarfı Aç ve Mektubu Göster
-            openButton.addEventListener('click', () => {
-                envelope.classList.add('opened');
+openButton.addEventListener('click', () => {
+    openButton.style.display = 'none'; // Butonu hemen gizle
+    envelope.classList.add('opened');
 
-                // Mektup metnini gösterme animasyonunu başlat
-                setTimeout(() => {
-                    envelopeWrapper.classList.add('open-letter');
-                }, 500);
-            });
+    // Mektup metnini gösterme animasyonunu başlat
+    setTimeout(() => {
+        envelopeWrapper.classList.add('open-letter');
+    }, 500);
+});
         });
     </script>
 </body>
